@@ -1,0 +1,26 @@
+uwsgi:
+  home: /home/jrm/.env/standard
+  http-socket: 127.0.0.1:8585
+  master: true
+  module: spire.runtime.uwsgi
+  need-app: true
+  processes: 4
+components:
+  - narrative.components.Narrative
+configuration:
+  schema:narrative:
+    admin_url: postgresql://postgres@localhost/postgres
+    hstore: true
+    url: postgresql://postgres@localhost/narrative
+logging:
+  disable_existing_loggers: false
+  formatters:
+    standard:
+      (): spire.support.logs.LogFormatter
+  handlers:
+    stream:
+      class: logging.StreamHandler
+      formatter: standard
+  root:
+    level: DEBUG
+    handlers: [stream]
