@@ -8,6 +8,12 @@ uwsgi:
 components:
   - narrative.components.Narrative
 configuration:
+  mesh:narrative:
+    bundle: narrative.API
+    url: http://localhost:8585/
+  mesh:platoon:
+    specification: narrative.bindings.platoon.specification
+    url: http://localhost:4321/
   schema:narrative:
     admin_url: postgresql://postgres@localhost/postgres
     hstore: true

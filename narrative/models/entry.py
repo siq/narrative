@@ -20,4 +20,8 @@ class Entry(Model):
     entry = Text()
     aspects = Hstore()
 
+    @classmethod
+    def purge(cls, session):
+        pass
+
 EntryAspectsIndex = Index('entry_aspects_idx', Entry.aspects, postgresql_using='gist')

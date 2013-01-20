@@ -19,3 +19,17 @@ class Entry(Resource):
             default='normal', operators='equal in')
         entry = Text()
         aspects = Map(Text(nonnull=True))
+
+    class task:
+        endpoint = ('TASK', 'entry')
+        title = 'Initiating an entry task'
+        schema = Structure(
+            structure={
+                'purge-entries': {},
+            },
+            nonempty=True,
+            polymorphic_on=Enumeration(['purge-entries'], name='task', nonempty=True))
+        responses = {
+            OK: Response(),
+            INVALID: Response(Errors),
+        }
