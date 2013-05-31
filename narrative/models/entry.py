@@ -14,8 +14,8 @@ class Entry(Model):
 
     id = Identifier()
     occurrence = DateTime(timezone=True, nullable=False, default=current_timestamp)
-    subject = Token(nullable=False, index=True)
     tag = Token(nullable=False, index=True)
+    subject = Token(nullable=False, index=True)
     importance = Enumeration('critical high normal low', nullable=False, default='normal')
     entry = Text()
     aspects = Hstore()
