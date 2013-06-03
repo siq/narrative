@@ -11,9 +11,9 @@ class EntryController(ModelController):
     model = Entry
     schema = SchemaDependency('narrative')
 
-    def task(self, request, response, subject, data):
-        session = self.schema.session
+    # def task(self, request, response, subject, data):
+    #     session = self.schema.session
 
-        task = data['task']
-        if task == 'purge-entries':
-            Entry.purge(session)
+    #     task = data['task']
+    #     if task == 'purge-entries':
+    #         Entry.purge(session)
