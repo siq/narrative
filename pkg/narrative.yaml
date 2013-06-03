@@ -1,0 +1,50 @@
+uwsgi:
+  daemonize: ${LOGPATH}/narrative.log
+  group: uwsgi
+  home: ${ENVPATH}/python
+  http-socket: 127.0.0.1:9993
+  log-date: "%%Y-%%m-%%dT%%H:%%M:%%SL UWSGI"
+  master: true
+  module: spire.runtime.uwsgi
+  need-app: true
+  pidfile: ${VARPATH}/narrative.pid
+  processes: 2
+  procname-prefix-spaced: "[narrative]"
+  threads: 10
+  touch-logreopen: ${VARPATH}/narrative.logreopen
+  uid: uwsgi
+  vacuum: true
+spire:
+  registration_url: http://localhost:10000/nucleus/1.0/service
+  services:
+    - id: narrative
+      dependencies: [platoon]
+include:
+  - /etc/siq/local.yaml
+components:
+  - narrative.components.Narrative
+configuration:
+  narrative.components.Narrative/api:
+    path: /
+  mesh:platoon:
+    bundle: platoon.API
+    url: http://localhost:4321/
+  mesh:narrative:
+    bundle: narrative.API
+    url: http://localhost:9993/
+  schema:narrative:
+    admin_url: postgresql://postgres@localhost/postgres
+    hstore: true
+    url: postgresql://postgres@localhost/narrative
+logging:
+  disable_existing_loggers: false
+  formatters:
+    standard:
+      (): spire.support.logs.LogFormatter
+  handlers:
+    stream:
+      class: logging.StreamHandler
+      formatter: standard
+  root:
+    level: DEBUG
+    handlers: [stream]

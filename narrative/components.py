@@ -32,11 +32,8 @@ class Narrative(Component):
     narrative = MeshDependency('narrative')
     # platoon = MeshDependency('platoon')
 
-    # @onstartup()
-    # def bootstrap_platoon_tasks(self):
-    #     if not self.platoon.ping():
-    #         raise TemporaryStartupError()
-
+    # @onstartup(service='narrative')
+    # def startup_narrative(self):
     #     DAILY.put()
     #     PURGE_ENTRIES.set_http_task(
     #         self.narrative.prepare('narrative/1.0/entry', 'task', None,
