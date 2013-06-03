@@ -26,3 +26,4 @@ class Entry(Model):
     #     pass
 
 EntryAspectsIndex = Index('entry_aspects_idx', Entry.aspects, postgresql_using='gist')
+EntryOwnerIndex = Index('entry_owner_idx', Entry.owner)
