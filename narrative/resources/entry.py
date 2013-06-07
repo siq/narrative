@@ -23,14 +23,13 @@ class Entry(Resource):
     class schema:
         id = UUID(operators='equal')
         occurrence = DateTime(readonly=True, operators='gt gte lt lte', description='The timestamp associated with this entry.')
-        subject = Token(nonempty=True, operators='equal prefix in', )
+        subject = Token(nonempty=True, operators='equal prefix in', description='The subject of the action being logged - normally just a UUID.')
         owner = UUID(operators='equal in', nonempty=True, description='ID of the user that generated this entry.')
-        tag = Token(nonempty=True, operators='equal prefix in')
-        subject = Token(nonempty=True, operators='equal prefix in')
+        tag = Token(nonempty=True, operators='equal prefix in', description='A hierarchical field defining the application component that generates this entry.')
         importance = Enumeration('critical high normal low', nonnull=True,
-            default='normal', operators='equal in')
-        entry = Text()
-        aspects = Map(Text(nonnull=True))
+            default='normal', operators='equal in', description='Importance level attached to the entry.')
+        entry = Text(description='Free-form field describing the entry in more detail.')
+        aspects = Map(Text(nonnull=True), description='A map to hold other information in the form of adhoc name-value pairs.')
 
     # class task:
     #     endpoint = ('TASK', 'entry')
