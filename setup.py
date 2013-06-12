@@ -7,7 +7,7 @@ setup(
     packages=enumerate_packages('narrative'),
     package_data={
         'narrative': ['migrations/env.py', 'migrations/script.py.mako',
-            'migrations/version/*.py'],
+            'migrations/versions/*.py'],
         'narrative.bindings': ['*.mesh'],
     }
 )
