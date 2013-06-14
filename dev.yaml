@@ -1,0 +1,11 @@
+components:
+  - narrative.components.Narrative
+configuration:
+  narrative.components.Narrative/api:
+    path: /
+  mesh:narrative:
+    bundle: narrative.API
+    url: http://localhost:9993/
+  schema:narrative:
+    url: sqlite:///narrative.db
+    migrations: narrative:migrations
