@@ -10,7 +10,7 @@ uwsgi:
   pidfile: ${VARPATH}/narrative.pid
   processes: 2
   procname-prefix-spaced: "[narrative]"
-  threads: 10
+  threads: 4
   touch-logreopen: ${VARPATH}/narrative.logreopen
   uid: uwsgi
   vacuum: true
