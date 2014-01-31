@@ -20,7 +20,8 @@ spire:
     - id: narrative
       dependencies: [platoon]
 include:
-  - /etc/siq/local.yaml
+  - common: /etc/siq/local.yaml
+  - narrative: /etc/siq/local.yaml
 components:
   - narrative.components.Narrative
 configuration:
