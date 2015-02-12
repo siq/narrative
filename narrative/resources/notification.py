@@ -28,7 +28,7 @@ class Notification(Resource):
         
     
     class markallread:
-        endpoint = ('MARKALLREAD', 'notification/id')
+        endpoint = ('MARKALLREAD', 'notification')
         title = 'Update multiple notifications from unread to read'
         specific = True
         schema = {
