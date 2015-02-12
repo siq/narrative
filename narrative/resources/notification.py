@@ -28,8 +28,9 @@ class Notification(Resource):
         
     
     class markallread:
-        endpoint = ('MARKALLREAD', 'notification')
-        title = 'Update multiple notifications from unread to read '
+        endpoint = ('MARKALLREAD', 'notification/id')
+        title = 'Update multiple notifications from unread to read'
+        specific = True
         schema = {
             'notification_ids': Sequence(UUID(nonnull=True, description='set of uuid of notification.')),
         }
