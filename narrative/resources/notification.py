@@ -44,7 +44,7 @@ class Notification(Resource):
         title = 'Initiating a notification task'
         schema = Structure(
             structure={
-                'expire-notifications': {},
+                'purge-notifications': {},
             },
             polymorphic_on='task',
             nonempty=True)
