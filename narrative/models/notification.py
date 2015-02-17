@@ -26,3 +26,4 @@ class Notification(Model):
     type = Token(nullable=False)
     entity = Token(nullable=False)
     
+NotificationOwnerIDIndex = Index('notification_ownerid_idx', Notification.ownerid)
