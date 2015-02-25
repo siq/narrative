@@ -70,6 +70,9 @@ class TestUserNotifications(TestNotification):
             data = {'notification_ids' :['a96be911-dd4a-4905-9cbd-a71fdbee60ee','e6c68874-e6a5-47f6-b0e1-510b7d89f0dd']}
             res_ = notification._get_client().execute('narrative/1.0/notification', 'markallread', None, data)
             print res_
+            data={'total':True,'query':{'ownerID':owner_id_,'status':'unread'}}
+            res_ = notification._get_client().execute('narrative/1.0/notification', 'query', None, data)
+            print res_.content['total']
        
 def makeSuite():
     return unittest.defaultTestLoader.loadTestsFromTestCase(TestUserNotifications)
