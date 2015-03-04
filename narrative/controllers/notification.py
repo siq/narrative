@@ -43,7 +43,7 @@ class NotificationController(ModelController):
     
     def task(self, request, response, subject, data):
         session = self.schema.session
-        delta = current_timestamp() - timedelta(days=2)
+        delta = current_timestamp() - timedelta(days=30)
         if data['task'] == 'purge-notifications':
             session.query(Notification).filter(Notification.created < delta).delete(synchronize_session=False)
         session.commit()
