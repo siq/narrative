@@ -24,7 +24,7 @@ class NotificationController(ModelController):
     mapping = {
         'id': 'id',
         'created': 'created',
-        'status': 'status',
+        'read': 'read',
         'resource': 'resource',
         'ownerID': 'ownerid',
         'type': 'type',
@@ -35,7 +35,7 @@ class NotificationController(ModelController):
     def markallread(self, request, response, subject, data):
         try:
             session = self.schema.session
-            session.query(self.model).filter(self.model.id.in_(data['notification_ids'])).update({self.model.status:'read'}, synchronize_session=False)       
+            session.query(self.model).filter(self.model.id.in_(data['notification_ids'])).update({self.model.read:True}, synchronize_session=False)       
             session.commit()
         except IntegrityError, e:
             raise ValidationError({'token': 'data-integrity-error',

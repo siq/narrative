@@ -20,10 +20,11 @@ class Notification(Model):
 
     id = Identifier()
     created = DateTime(timezone=True, nullable=False, default=current_timestamp)
-    status = Enumeration('read unread', nullable=False, default='unread')
+    read = Boolean(default=False)
     resource = Surrogate(nullable=False)
     ownerid = Token(nullable=True, index=True)
     type = Token(nullable=False)
     entity = Token(nullable=False)
     
 NotificationOwnerIDIndex = Index('notification_ownerid_idx', Notification.ownerid)
+NotificationReadIndex = Index('notification_read_idx', Notification.read)
