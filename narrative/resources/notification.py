@@ -19,7 +19,7 @@ class Notification(Resource):
  
     class schema:
         id = UUID(operators='equal', oncreate=True)
-        read = Boolean(default=False)
+        read = Boolean(default=False, operators='equal')
         resource = Surrogate(nullable=False)
         ownerID = UUID(operators='equal')
         type = Token(nullable=False)
