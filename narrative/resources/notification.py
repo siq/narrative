@@ -16,7 +16,7 @@ class Notification(Resource):
     version = 1
     requests = 'create put query'
 
- 
+
     class schema:
         id = UUID(operators='equal', oncreate=True)
         read = Boolean(default=False, operators='equal')
@@ -25,8 +25,9 @@ class Notification(Resource):
         type = Token(nullable=False)
         entity = Token(nullable=False)
         created = DateTime(utc=True, sortable=True)
-        
-    
+        viewableTo = Sequence(Text())
+
+
     class markallread:
         endpoint = ('MARKALLREAD', 'notification')
         title = 'Update multiple notifications from unread to read'
@@ -37,7 +38,7 @@ class Notification(Resource):
             OK: Response(),
             INVALID: Response(Errors),
         }
-        
+
     class task:
         endpoint = ('TASK', 'notification')
         title = 'Initiating a notification task'

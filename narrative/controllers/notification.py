@@ -14,13 +14,13 @@ from datetime import timedelta
 import json
 
 
-    
+
 class NotificationController(ModelController):
     resource = NotificationResource
     version = (1, 0)
     model = Notification
     schema = SchemaDependency('narrative')
-    
+
     mapping = {
         'id': 'id',
         'created': 'created',
@@ -30,24 +30,24 @@ class NotificationController(ModelController):
         'type': 'type',
         'entity': 'entity',
     }
-    
-    
+
+
     def markallread(self, request, response, subject, data):
         try:
             session = self.schema.session
-            session.query(self.model).filter(self.model.id.in_(data['notification_ids'])).update({self.model.read:True}, synchronize_session=False)       
+            session.query(self.model).filter(self.model.id.in_(data['notification_ids'])).update({self.model.read:True}, synchronize_session=False)
             session.commit()
         except IntegrityError, e:
             raise ValidationError({'token': 'data-integrity-error',
             'message': 'Notification is not updated in table.'})
-    
+
     def task(self, request, response, subject, data):
         session = self.schema.session
         delta = current_timestamp() - timedelta(days=30)
         if data['task'] == 'purge-notifications':
             session.query(Notification).filter(Notification.created < delta).delete(synchronize_session=False)
         session.commit()
-        
+
     def query(self, request, response, subject, data):
         query = self.schema.session.query(self.model)
         filters = data.get('query')
